@@ -1,24 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import SignUpComponent from './components/SignUpComponent.tsx'
+import { initializeApp } from 'firebase/app'
+
+//This will initialize the entire authentication service for our app
+//Reference to the authentication service.
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <SignUpComponent/>
+    </>
   );
 }
 
