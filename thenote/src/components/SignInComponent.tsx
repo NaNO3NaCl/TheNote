@@ -2,7 +2,7 @@ import {signIn} from '../firebase/firebaseActions'
 import React, {useState} from 'react'
 import {Button} from '@mui/material'
 
-export let user;
+export let user; // here to see if I can move the user identity between pages
 export const SignInComponent = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

@@ -1,4 +1,9 @@
-import {auth} from './firebaseConfig.js'
+import {auth, db} from './firebaseConfig.js'
+import {doc, setDoc,
+        collection, getDocs } from "firebase/firestore"
+//Can be removed
+import {setLogLevel} from "firebase/firestore"
+
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -34,3 +39,32 @@ export const signUp = (email, password) => {
 export const signOutUser = ()=> {
   return signOut(auth);
 };
+
+export async function addNote(note, title) {
+  try {
+    setLogLevel("debug");
+    console.log("Attempting setDoc");
+    // Update this write to a collection that is the users ID and
+    // a random doc ID
+    await setDoc(doc(db, "users", "test22"), {
+      noteData: note,
+      noteTitle: title
+    });
+    console.log("Note added successfully");
+  } catch (error) {
+    console.error("Failed to add note:", error);
+  }
+}
+
+export async function getNotes() {
+  try {
+    const qSnap = await getDocs(collection(db, "users"));
+    qSnap.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+    console.log("Notes retrieved successfully");
+    return qSnap;
+  } catch (error) {
+    console.error("Failed to retrieve notes:", error);
+  }
+}
